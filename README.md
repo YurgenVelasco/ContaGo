@@ -1,239 +1,370 @@
-# 💰 ContaGo — Gestión financiera para pequeños negocios
+ <div align="center">
 
-### 📊 Organice sus finanzas. Controle su negocio. Tome mejores decisiones.
+# 💸 ContaGo
 
-**ContaGo** es un proyecto de software orientado a facilitar la gestión financiera de pequeños negocios y emprendimientos mediante una plataforma web intuitiva, organizada y accesible.
+### FINANZAS INTELIGENTES PARA NEGOCIOS QUE QUIEREN CRECER
 
-Su propósito es ayudar a los emprendedores a mantener un mayor control sobre sus ingresos, gastos y movimientos financieros, ofreciendo herramientas que faciliten el seguimiento de sus operaciones y la toma de decisiones.
+**Su negocio. Sus números. Su tranquilidad.**
 
----
+Una propuesta de plataforma financiera diseñada para ayudar a pequeños negocios y emprendedores a organizar su dinero, comprender sus movimientos y tomar decisiones con mayor claridad.
 
-## 🎯 Objetivo del proyecto
+![Status](https://img.shields.io/badge/STATUS-EN_DESARROLLO-F59E0B?style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
 
-Desarrollar una solución tecnológica que permita a los pequeños negocios gestionar su información financiera de manera sencilla, reduciendo la dependencia de registros manuales y facilitando la organización de sus operaciones económicas.
+<br>
 
-### ¿Qué problema busca resolver?
-
-Muchos pequeños negocios administran sus ingresos y gastos mediante cuadernos, archivos dispersos o registros manuales, lo que dificulta:
-
-- Identificar los ingresos y gastos del negocio.
-- Llevar un control organizado de los movimientos financieros.
-- Consultar información histórica.
-- Analizar el comportamiento de las finanzas.
-- Obtener reportes para apoyar decisiones administrativas.
-
-**ContaGo busca centralizar esta información en una sola plataforma.**
+[**🚀 Conocer el proyecto**](#-qué-es-contago) · [**✨ Funcionalidades**](#-qué-ofrecerá-contago) · [**🛠️ Tecnologías**](#️-stack-tecnológico) · [**🗺️ Roadmap**](#️-hoja-de-ruta) · [**👨‍💻 Autor**](#-creado-por)
 
 ---
 
-## ✨ Funcionalidades del proyecto
+### 💡 «Los grandes negocios comienzan con pequeñas decisiones bien tomadas».
 
-El proyecto contempla las siguientes capacidades, implementadas o desarrolladas en sus distintas etapas:
+</div>
 
-### 📊 Panel de control
+## 🚀 ¿Qué es ContaGo?
 
-- Visualización general de la información financiera.
+**ContaGo** es una iniciativa de desarrollo de software enfocada en crear una plataforma web para la organización y gestión financiera de pequeños negocios.
+
+El proyecto nace de una necesidad cotidiana: muchos emprendedores trabajan constantemente para hacer crecer sus negocios, pero no siempre cuentan con herramientas sencillas para organizar sus ingresos, gastos y operaciones.
+
+**Nuestra propuesta es transformar esa información en claridad.**
+
+ContaGo busca reunir las operaciones financieras de un negocio en un mismo lugar, mediante una experiencia intuitiva y herramientas que ayuden a comprender cómo se mueve el dinero.
+
+> 🎯 **Nuestra misión:** Hacer que la organización financiera sea más accesible, sencilla y comprensible para pequeños negocios y emprendedores.
+
+---
+
+## 🎯 El problema que queremos resolver
+
+Imagine administrar un negocio donde:
+
+- Los ingresos se registran en diferentes cuadernos.
+- Los gastos se mezclan con otras operaciones.
+- La información está distribuida en múltiples archivos.
+- Consultar movimientos anteriores requiere demasiado tiempo.
+- Las decisiones se toman sin una visión clara del comportamiento financiero.
+
+Esta situación puede dificultar la organización y el crecimiento del negocio.
+
+### 💚 Nuestra respuesta: ContaGo
+
+Una propuesta de plataforma centralizada para registrar, organizar y consultar información financiera de manera sencilla.
+
+| Sin una organización centralizada | Con la propuesta ContaGo |
+|---|---|
+| 📝 Registros dispersos | 📂 Información organizada |
+| ❓ Dificultad para conocer los gastos | 💸 Seguimiento de egresos |
+| 📚 Consultas manuales | 🔎 Historial consultable |
+| 📉 Información difícil de interpretar | 📊 Indicadores y reportes |
+| ⏳ Tiempo dedicado a ordenar registros | ⚡ Procesos más sencillos |
+
+*Los beneficios descritos representan los objetivos del producto y deberán validarse cuando exista una versión disponible para usuarios.*
+
+---
+
+## ✨ ¿Qué ofrecerá ContaGo?
+
+La plataforma se proyecta alrededor de módulos que responden a necesidades frecuentes de pequeños negocios.
+
+### 📊 01 — Dashboard financiero
+
+Un espacio para consultar información relevante del negocio de forma organizada.
+
+**Capacidades previstas:**
 - Resumen de ingresos y gastos.
-- Indicadores para el seguimiento de movimientos.
-- Consulta de información relevante del negocio.
+- Indicadores financieros.
+- Consulta rápida de movimientos.
+- Información presentada mediante componentes visuales.
 
-### 💵 Gestión de ingresos y gastos
+### 💵 02 — Gestión de ingresos
 
-- Registro de movimientos financieros.
+Herramientas para registrar y consultar entradas de dinero.
+
+**Capacidades previstas:**
+- Registro de ingresos.
+- Consulta del historial.
+- Clasificación de operaciones.
+- Seguimiento de movimientos.
+
+### 💸 03 — Control de gastos
+
+Organización de las salidas de dinero del negocio.
+
+**Capacidades previstas:**
+- Registro de egresos.
+- Clasificación por categorías.
+- Consulta y seguimiento.
+- Información para analizar gastos.
+
+### 🗂️ 04 — Categorías personalizadas
+
+Organización de movimientos financieros para facilitar su consulta.
+
+**Capacidades previstas:**
+- Creación de categorías.
 - Clasificación de ingresos y egresos.
-- Consulta del historial de operaciones.
-- Organización de movimientos por categorías.
+- Administración de registros.
+- Organización de información financiera.
 
-### 🗂️ Administración de categorías
+### 📈 05 — Reportes
 
-- Creación y gestión de categorías.
-- Clasificación de operaciones financieras.
-- Organización de los registros del negocio.
+Información estructurada para apoyar decisiones administrativas.
 
-### 📈 Reportes financieros
+**Capacidades previstas:**
+- Consulta de información histórica.
+- Resúmenes financieros.
+- Análisis de movimientos.
+- Exportación de reportes según las capacidades de cada versión.
 
-- Consulta de información financiera.
-- Seguimiento de ingresos y gastos.
-- Exportación de reportes en formatos como CSV y PDF, según la versión.
+### 🔐 06 — Usuarios y seguridad
 
-### 🔐 Seguridad y administración
+Controles orientados a proteger la información del negocio.
 
+**Objetivos técnicos:**
 - Autenticación de usuarios.
-- Validación de información.
-- Gestión administrativa.
-- Controles de acceso según las funcionalidades de cada versión.
+- Autorización y control de acceso.
+- Validación de operaciones.
+- Protección de información sensible.
 
-> **Nota:** ContaGo ha tenido diferentes etapas de desarrollo. Las funcionalidades descritas corresponden al alcance trabajado en el proyecto y no implican que todas estén disponibles en el código publicado actualmente en este repositorio.
-
----
-
-## 🛠️ Tecnologías utilizadas
-
-ContaGo ha sido trabajado con diferentes tecnologías durante su evolución.
-
-### Ecosistema .NET
-
-- **C#**
-- **.NET / ASP.NET Core**
-- **SQL Server**
-- Herramientas de desarrollo de Microsoft
-
-### Evolución hacia tecnologías web
-
-El proyecto también ha explorado una arquitectura basada en:
-
-- **Node.js**
-- **Express**
-- **React**
-- **Vite**
-- **JavaScript**
-- **SQL Server**
-
-La selección tecnológica definitiva dependerá de la versión que se continúe desarrollando.
+> **Estado funcional:** Estas capacidades forman parte del alcance trabajado y proyectado para ContaGo. Su descripción no implica que estén disponibles actualmente en una versión pública ejecutable.
 
 ---
 
-## 🏗️ Arquitectura del sistema
+## 👥 ¿Para quién estamos construyendo ContaGo?
 
-ContaGo se plantea como una aplicación web que separa las responsabilidades de presentación, lógica de negocio y persistencia.
+<div align="center">
 
-```text
-            USUARIO
-               |
-               v
-      INTERFAZ WEB
-               |
-               v
-      LÓGICA DE NEGOCIO
-               |
-               v
-       ACCESO A DATOS
-               |
-               v
-          SQL SERVER
+| 🏪 Comerciantes | 🛍️ Emprendedores | 🍽️ Negocios de comida | 💼 Independientes |
+|---|---|---|---|
+| Organización diaria de ingresos y gastos | Seguimiento financiero del emprendimiento | Control de movimientos económicos | Registro estructurado de operaciones |
+| Consulta de información | Mayor claridad financiera | Clasificación de gastos | Historial de movimientos |
+
+</div>
+
+**No necesita administrar una gran empresa para merecer herramientas que le ayuden a organizar su negocio.**
+
+---
+
+## 🛠️ Stack tecnológico
+
+ContaGo busca evolucionar hacia una arquitectura moderna, modular y portable, priorizando tecnologías de código abierto y evitando dependencias obligatorias de un proveedor de infraestructura.
+
+### 🚀 Arquitectura objetivo
+
+<div align="center">
+
+| Capa | Tecnología | Responsabilidad |
+|---|---|---|
+| 🎨 Frontend | **React + TypeScript + Vite** | Interfaz de usuario |
+| ⚙️ Backend | **Node.js + Express + TypeScript** | API REST y lógica de negocio |
+| 🗄️ Base de datos | **PostgreSQL** | Almacenamiento relacional |
+| ✅ Validaciones | **Zod (propuesto)** | Validación de datos |
+| 🧪 Pruebas | **Vitest (propuesto)** | Pruebas automatizadas |
+| 🐧 Infraestructura | **Linux + contenedores OCI (propuesto)** | Despliegue portable |
+
+</div>
+
+**Estado:** La arquitectura TypeScript, Node.js y PostgreSQL ha sido seleccionada como dirección de desarrollo. Algunas herramientas complementarias siguen pendientes de evaluación e implementación.
+
+### 🏗️ Vista conceptual
+
+```mermaid
+flowchart TD
+    A["👤 Usuario"] --> B["🎨 React + TypeScript"]
+    B -->|"HTTPS / API REST"| C["⚙️ Node.js + Express"]
+    C --> D["🧠 Servicios y lógica de negocio"]
+    D --> E["🗄️ PostgreSQL"]
+
+    classDef ui fill:#0f766e,color:#ffffff,stroke:#14b8a6;
+    classDef api fill:#1e40af,color:#ffffff,stroke:#60a5fa;
+    classDef db fill:#374151,color:#ffffff,stroke:#9ca3af;
+
+    class B ui;
+    class C,D api;
+    class E db;
 ```
 
-Esta separación busca facilitar el mantenimiento, la escalabilidad y la evolución futura de la aplicación.
+*Diagrama de la arquitectura objetivo, no de un despliegue público actualmente operativo.*
+
+### 🔄 Evolución tecnológica
+
+Durante su proceso de desarrollo, ContaGo también ha explorado tecnologías del ecosistema Microsoft:
+
+- C#.
+- .NET / ASP.NET Core.
+- Entity Framework Core.
+- SQL Server.
+
+Estas experiencias forman parte de la evolución técnica del proyecto.
+
+**La decisión actual es desarrollar las próximas versiones alrededor de TypeScript, Node.js y PostgreSQL.**
+
+Esto permitirá explorar una arquitectura multiplataforma, manteniendo la capacidad de utilizar diferentes proveedores de infraestructura.
 
 ---
 
-## 📁 Estado actual del repositorio
+## 🧩 Principios de ingeniería
 
-La rama principal publicada actualmente contiene:
+Además de sus funcionalidades, ContaGo busca construirse sobre principios técnicos claros.
+
+| Principio | Aplicación prevista |
+|---|---|
+| 🔐 Seguridad | Validación y autorización en el servidor |
+| 🧱 Modularidad | Separación de responsabilidades |
+| 🔄 Portabilidad | Despliegue independiente de un proveedor específico |
+| 💾 Integridad | Operaciones financieras consistentes |
+| 🧪 Calidad | Pruebas automatizadas y revisión de cambios |
+| 📚 Documentación | Información técnica y funcional actualizada |
+| 🚀 Evolución | Arquitectura preparada para crecimiento progresivo |
+
+Para el manejo de información financiera, la integridad de los datos y el control de acceso serán prioridades fundamentales.
+
+---
+
+## 📂 Estado del repositorio
+
+### 🔎 Situación actual
+
+La rama principal pública contiene documentación del proyecto.
 
 ```text
 ContaGo/
-├── Contago.slnx
+│
 └── README.md
 ```
 
-El archivo `Contago.slnx` referencia un proyecto .NET ubicado en:
+**Disponibilidad actual:**
 
-```text
-Contago/Contago.csproj
-```
+- ✅ Repositorio público.
+- ✅ Documentación general del producto.
+- ✅ Definición de la dirección tecnológica.
+- ⏳ Código fuente de la nueva arquitectura pendiente de publicación.
+- ⏳ Versión ejecutable pública pendiente.
+- ⏳ Demostración funcional pendiente.
 
-Sin embargo, los archivos de implementación de ese proyecto no se encuentran publicados actualmente en la rama principal.
-
-### Estado de disponibilidad
-
-- ✅ Repositorio público disponible.
-- ✅ Archivo de solución .NET.
-- ✅ Documentación general.
-- ⏳ Código fuente completo pendiente de publicación o incorporación.
-- ⏳ Instrucciones de instalación pendientes de documentar para una versión ejecutable.
-
-**Actualmente no es posible garantizar la ejecución del sistema utilizando únicamente los archivos públicos del repositorio.**
-
----
-
-## 🚀 Instalación y ejecución
-
-La instalación se documentará cuando se publique una versión ejecutable de ContaGo.
-
-Para una futura versión .NET, la ejecución podrá incluir herramientas como:
-
-- .NET SDK de la versión correspondiente.
-- SQL Server.
-- Visual Studio o Visual Studio Code.
-
-Los comandos, variables de entorno, migraciones y configuraciones de base de datos se documentarán de acuerdo con la implementación publicada.
-
----
-
-## 🔒 Seguridad
-
-La seguridad es un aspecto fundamental de ContaGo debido a la naturaleza financiera de la información.
-
-Entre los objetivos técnicos del proyecto se encuentran:
-
-- Protección de credenciales.
-- Validación de entradas.
-- Control de acceso por usuario.
-- Protección de información financiera.
-- Gestión segura de operaciones.
-- Separación de configuraciones sensibles y código fuente.
-
-Las medidas de seguridad deben verificarse sobre cada versión ejecutable antes de su uso en entornos reales.
+> ⚠️ **Transparencia:** ContaGo aún no se presenta como una aplicación pública lista para gestionar información financiera real. Este repositorio documenta el propósito y la evolución del producto.
 
 ---
 
 ## 🗺️ Hoja de ruta
 
-- [ ] Publicar una versión ejecutable y documentada del sistema.
-- [ ] Definir y consolidar la arquitectura tecnológica.
-- [ ] Documentar la configuración de la base de datos.
-- [ ] Incorporar pruebas automatizadas.
-- [ ] Mejorar la documentación técnica de los módulos.
-- [ ] Crear una demostración visual de la plataforma.
-- [ ] Preparar una versión estable para pruebas con pequeños negocios.
-- [ ] Evaluar futuras funcionalidades comerciales.
+Nuestra visión es construir ContaGo progresivamente, priorizando estabilidad, utilidad y claridad.
+
+### Fase 1 — Definición del producto
+
+- [x] Identificar el problema y público objetivo.
+- [x] Definir los módulos principales.
+- [x] Seleccionar la arquitectura tecnológica objetivo.
+- [ ] Consolidar los requerimientos funcionales.
+
+### Fase 2 — Fundamentos técnicos
+
+- [ ] Organizar el frontend y backend.
+- [ ] Diseñar el modelo relacional de PostgreSQL.
+- [ ] Implementar validaciones de entrada.
+- [ ] Establecer autenticación y autorización.
+- [ ] Configurar pruebas automatizadas.
+
+### Fase 3 — Módulos financieros
+
+- [ ] Implementar el dashboard.
+- [ ] Desarrollar el registro de ingresos y gastos.
+- [ ] Incorporar administración de categorías.
+- [ ] Implementar consultas e historial.
+- [ ] Desarrollar reportes financieros.
+
+### Fase 4 — Calidad y lanzamiento
+
+- [ ] Auditar aspectos de seguridad.
+- [ ] Validar las operaciones financieras.
+- [ ] Incorporar pruebas de integración.
+- [ ] Crear una demostración visual.
+- [ ] Documentar la instalación y ejecución.
+- [ ] Preparar pruebas con pequeños negocios.
+
+### Fase 5 — Evolución
+
+- [ ] Recopilar comentarios de usuarios.
+- [ ] Mejorar la experiencia de uso.
+- [ ] Evaluar nuevas necesidades del negocio.
+- [ ] Preparar futuras versiones comerciales.
 
 ---
 
-## 👥 Público objetivo
+## 🚀 Instalación y ejecución
 
-ContaGo está dirigido principalmente a:
+La arquitectura seleccionada todavía no se encuentra publicada como una versión completa y ejecutable en este repositorio.
 
-- Pequeños negocios.
-- Emprendedores.
-- Comerciantes independientes.
-- Personas que necesitan organizar las finanzas de sus actividades económicas.
+Cuando se incorpore una implementación funcional, esta sección incluirá:
 
-El objetivo es facilitar el acceso a herramientas de organización financiera sin exigir conocimientos contables avanzados para las operaciones básicas.
+- Requisitos de Node.js y PostgreSQL.
+- Instalación de dependencias.
+- Configuración de variables de entorno.
+- Preparación de la base de datos.
+- Ejecución del frontend y backend.
+- Comandos de pruebas.
+- Instrucciones de despliegue.
 
----
-
-## 👨‍💻 Autor
-
-**Yurgen Andrey Velasco Rojas**
-
-Aprendiz de Análisis y Desarrollo de Software (ADSO) del SENA.
-
-Desarrollador de software con interés en el desarrollo backend, arquitectura de aplicaciones, bases de datos y tecnologías web.
-
-### Perfil profesional
-
-- GitHub: [@YurgenVelasco](https://github.com/YurgenVelasco)
+**No se ofrecen comandos de instalación que todavía no hayan sido verificados con una implementación pública.**
 
 ---
 
-## 📄 Derechos de autor y licencia
+## 🤝 Queremos construir una herramienta útil
+
+ContaGo busca responder a necesidades reales, no únicamente demostrar conocimientos técnicos.
+
+Nos interesa conocer las dificultades que enfrentan pequeños negocios al controlar sus ingresos y gastos.
+
+Las ideas y sugerencias relacionadas con la experiencia del usuario, la claridad de los reportes y la organización de movimientos pueden contribuir a orientar futuras decisiones del producto.
+
+El repositorio puede utilizarse como punto de referencia para conocer la propuesta y su evolución.
+
+---
+
+## 👨‍💻 Creado por
+
+<div align="center">
+
+### Yurgen Andrey Velasco Rojas
+
+**Software Developer in Training | SENA ADSO**
+
+Apasionado por el desarrollo de software, la arquitectura de aplicaciones, las bases de datos y la construcción de soluciones tecnológicas.
+
+Interesado en explorar diferentes ecosistemas y desarrollar productos con independencia tecnológica.
+
+[![GitHub](https://img.shields.io/badge/GitHub-YurgenVelasco-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/YurgenVelasco)
+
+</div>
+
+---
+
+## ⚖️ Derechos de autor
 
 **Copyright © 2026 Yurgen Andrey Velasco Rojas.**
 
-El repositorio no tiene actualmente una licencia de software abierta.
+ContaGo es un proyecto de desarrollo de software cuya distribución y futura comercialización están por definirse.
 
-La disponibilidad pública del código o de la documentación no implica una autorización general para copiar, modificar, redistribuir o comercializar el software.
+Actualmente no se ha publicado una licencia abierta para el repositorio.
 
-Las condiciones de licencia podrán definirse en una versión posterior del proyecto.
+La disponibilidad pública de esta documentación no implica una autorización general para reutilizar, distribuir o comercializar el software.
 
 ---
 
-## 🌟 Visión
+<div align="center">
 
-Convertir ContaGo en una herramienta útil para pequeños negocios que buscan mayor organización y control sobre su información financiera.
+# 💚 ContaGo
 
-**ContaGo — Sus finanzas, más claras.**
+### Su negocio. Sus números. Su tranquilidad.
 
-Desarrollado con dedicación, aprendizaje continuo y pasión por la tecnología. 💻
+**Construyendo una forma más sencilla de comprender las finanzas de pequeños negocios.**
+
+![Made with](https://img.shields.io/badge/Made_with-Passion_%26_Code-16A34A?style=for-the-badge)
+
+[⬆ Volver al inicio](#-contago)
+
+</div>
