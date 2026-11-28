@@ -1,0 +1,34 @@
+{
+  "name": "contago-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": ">=24.11.0 <25"
+  },
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node --env-file-if-exists=.env dist/main.js",
+    "lint": "eslint .",
+    "test": "pnpm build && node --test tests/config.test.cjs tests/health.test.cjs",
+    "test:postgres": "pnpm build && node --env-file-if-exists=.env --test tests/postgres.test.cjs",
+    "prisma:introspect": "prisma db pull --print"
+  },
+  "dependencies": {
+    "@nestjs/common": "^11.1.0",
+    "@nestjs/core": "^11.1.0",
+    "@nestjs/platform-express": "^11.1.0",
+    "pg": "^8.16.0",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.15.0",
+    "eslint": "^10.15.0",
+    "prisma": "^7.0.0",
+    "typescript": "~5.9.3",
+    "typescript-eslint": "^8.48.0"
+  }
+}
