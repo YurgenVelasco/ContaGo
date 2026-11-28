@@ -1,27 +1,24 @@
 # Arquitectura del backend
 
-```text
-backend/
-  src/
-    app.module.ts
-    main.ts
-    config/
-    database/
-    health/
-    common/
-    auth/
-    users/
-    businesses/
-    memberships/
-  tests/
-  prisma/
-  prisma.config.ts
+```mermaid
+flowchart LR
+    HTTP["NestJS: CORS y CSRF"] --> Guard["Guard de sesión y autorización de ruta"]
+    Guard --> Auth["auth: registro, login y sesiones"]
+    Guard --> Negocios["businesses y memberships"]
+    Guard --> SA["users: administración de plataforma"]
+    Auth --> AuthPool["pg · contago_auth"]
+    Negocios --> AppPool["pg · contago_app"]
+    SA --> SAPool["pg · contago_sa"]
+    AuthPool --> DB["PostgreSQL · esquema contago"]
+    AppPool --> DB
+    SAPool --> DB
 ```
 
-- `config` valida los parámetros de arranque y los publica mediante un proveedor de Nest. Los mensajes de configuración identifican la variable y omiten su valor.
-- `database` crea un único pool de negocio, comprueba el contrato de permisos en el arranque y cierra las conexiones al detenerse. Usa tiempos máximos de conexión y de consulta, y un `search_path` de sesión acotado. Las llamadas al esquema deben estar calificadas.
-- `health` comprueba disponibilidad del proceso y del enlace a PostgreSQL. La respuesta HTTP omite roles, nombres de la base, consultas y detalles de fallos. La comprobación completa de permisos ocurre en el arranque. Reinicie y verifique después de cambios de permisos o migraciones.
-- `auth`, `users`, `businesses` y `memberships` definen los límites de módulos futuros. `common` reserva la ubicación de componentes transversales con consumidores reales.
+- `config` valida los tres destinos y exige identidades distintas para la misma base. Su salida evita revelar el valor de una variable inválida.
+- `database` administra un pool por identidad configurada. Verifica el conjunto exacto de funciones de cada grupo y la ausencia de permisos directos sobre tablas del esquema al arrancar. Las consultas usan SQL fijo con parámetros y conexiones `READ COMMITTED`.
+- `auth` resuelve sesiones mediante hashes de tokens y expone el actor verificado a los módulos. Cada controlador declara si su política requiere sesión. Una ruta sin política explícita se deniega.
+- `businesses` y `memberships` usan guards de rol local. `users` comprueba el rol global SA y usa únicamente la conexión administrativa. Las funciones PostgreSQL vuelven a verificar las reglas de negocio.
+- `health` comprueba disponibilidad del proceso y de los pools configurados. Las respuestas de salud omiten detalles del servidor. La comprobación completa de privilegios ocurre al arrancar.
 
-PostgreSQL conserva el control de autorizaciones por negocio y de transacciones financieras. El backend usa un driver SQL para conservar ese contrato. Prisma es una herramienta de inspección en desarrollo. El despliegue de base de datos se realiza fuera del proceso web con los SQL existentes.
+Las migraciones SQL se ejecutan por separado con el propietario del esquema. Prisma sigue siendo una herramienta de inspección. Consulte [el contrato HTTP y la matriz de permisos](seguridad.md) y [la guía de activación y pruebas](../README.md).
 

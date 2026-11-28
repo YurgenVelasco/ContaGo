@@ -18,7 +18,9 @@ pwsh -NoProfile -File database/tests/concurrency_tests.ps1
 
 El script de integridad usa una transacción con `ROLLBACK` y cambia a los roles de servicio para probar sus permisos. Ejecútelo sobre una base de pruebas como el propietario, con permiso para asumir los tres roles. El script de concurrencia requiere PowerShell 7, `psql` y privilegio para crear y eliminar su propia base temporal. Instala las migraciones en esa base, verifica que una sesión espera un bloqueo real y elimina la base que creó. Si el clúster es compartido, aprovisione los roles ContaGo antes de las pruebas o use un clúster desechable. Los roles de PostgreSQL tienen alcance de clúster.
 
-## Despliegue e integración futura
+Para actualizar una instalación con 001–005 aplicados, ejecute solo 006_auth_sessions.sql como propietario del esquema. Consulte el aprovisionamiento de identidades de ejecución en [el README del backend](../backend/README.md).
+
+## Despliegue e integración
 
 - Cree tres identidades de conexión de servicio y conceda a cada una solo su grupo `NOLOGIN` correspondiente. No use el propietario de las migraciones como identidad de la API. Verifique que los grupos preexistentes y las identidades de servicio no hereden privilegios ajenos.
 - Cree el primer usuario SA mediante una operación de aprovisionamiento del propietario. Genere su hash en un componente de autenticación autorizado y entregue el valor por un canal seguro. El registro normal siempre crea usuarios comunes.
@@ -35,6 +37,7 @@ El script de integridad usa una transacción con `ROLLBACK` y cambia a los roles
 | `003_financial_functions.sql` | Validación de acceso, contabilización, aprobación, pagos y reversos |
 | `004_audit_security.sql` | Registro, administración, consultas autorizadas, triggers y permisos |
 | `005_seed_catalogs.sql` | Catálogo inicial COP |
+| `006_auth_sessions.sql` | Sesiones revocables, funciones privadas de autenticación y revocación al deshabilitar |
 | `tests/integrity_tests.sql` | Integridad, aislamiento, estados, reversos y permisos |
 | `tests/concurrency_tests.ps1` | Carreras de saldo, idempotencia, aprobación y aplicaciones |
 | [Modelo relacional](docs/modelo_relacional.md) | Entidades y cardinalidades |

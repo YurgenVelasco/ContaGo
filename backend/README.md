@@ -1,6 +1,6 @@
 # Backend de ContaGo 1.0
 
-Fundación NestJS con TypeScript estricto y conectividad a PostgreSQL mediante `pg`. Los únicos endpoints de esta fase son los de salud. Los módulos de autenticación, usuarios, negocios y membresías reservan la estructura para la siguiente fase.
+Fundación NestJS con TypeScript estricto y conectividad a PostgreSQL mediante `pg`. La fase 2.1 implementa autenticación por sesión, administración de plataforma y autorización de negocios y membresías.
 
 ## Inicio local
 
@@ -43,6 +43,29 @@ psql -X -h localhost -p 5432 -U postgres -d postgres -W -c "SELECT datname FROM 
 
 Con el backend iniciado, `Invoke-RestMethod http://127.0.0.1:3000/health/ready` debe devolver `status: ok`.
 
+## Activar autenticación y administración
+
+Aplique database/006_auth_sessions.sql con el propietario del esquema. En una base nueva ejecute primero 001–005. En una base existente con las 13 tablas aplique solo 006. Esta migración añade la tabla de sesiones, funciones con acceso restringido y un trigger de revocación al deshabilitar un usuario.
+
+Aprovisione dos identidades LOGIN separadas. Estos comandos se ejecutan en una sesión de mantenimiento. Puede usar \password para asignar las contraseñas de manera interactiva.
+
+```sql
+CREATE ROLE contago_auth_api LOGIN INHERIT;
+GRANT contago_auth TO contago_auth_api;
+CREATE ROLE contago_sa_api LOGIN INHERIT;
+GRANT contago_sa TO contago_sa_api;
+```
+
+Configure las URLs en el .env privado o en el gestor de secretos del despliegue. Las tres apuntan a la misma base y usan el mismo modo TLS. El servidor valida que las identidades sean distintas y que sus permisos correspondan al grupo asignado. Ningún grupo de servicio tiene acceso directo a las tablas del esquema.
+
+| Variable | Propósito |
+|---|---|
+| AUTH_DATABASE_URL | Conexión LOGIN con contago_auth. Necesaria para activar la autenticación. |
+| ADMIN_DATABASE_URL | Conexión LOGIN con contago_sa. Necesaria para activar la administración de plataforma. |
+| AUTH_ALLOWED_ORIGINS | Orígenes exactos separados por comas. En desarrollo se permiten por defecto localhost y 127.0.0.1 en el puerto 3000. En producción debe declararse al activar autenticación y los orígenes deben ser HTTPS. |
+
+La configuración de fase 2.0 puede seguir sirviendo salud. Las operaciones que requieren una conexión de servicio ausente devuelven 503. El alta de un SA queda reservada al aprovisionamiento administrativo con un hash Argon2id. La ruta pública de registro crea usuarios comunes.
+
 ## Pruebas
 
 ```powershell
@@ -58,9 +81,11 @@ $env:NODE_ENV = 'test'
 pnpm test:postgres
 ```
 
+Para las pruebas HTTP de fase 2.1, use PostgreSQL desechable con una base llamada contago_*_test, las migraciones 001–006 y las tres cuentas de servicio indicadas. Exporte NODE_ENV=test, DATABASE_URL, AUTH_DATABASE_URL, ADMIN_DATABASE_URL, DATABASE_TLS=disable para loopback y AUTH_TEST_OWNER_URL para el propietario de esa misma base desechable. Esta última conexión solo se usa para crear y observar fixtures. Ejecute pnpm test:auth y elimine la base de pruebas al terminar. El script usa las variables exportadas, que tienen precedencia sobre cualquier configuración de trabajo.
+
 ## Documentación
 
 - [Arquitectura](docs/arquitectura.md)
 - [Contrato PostgreSQL e introspección](docs/postgresql.md)
-- [Autenticación y autorización para la fase 2.1](docs/seguridad.md)
+- [Sesiones, matriz de permisos y endpoints](docs/seguridad.md)
 

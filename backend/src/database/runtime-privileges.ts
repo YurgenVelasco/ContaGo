@@ -1,28 +1,46 @@
+export const PRIVILEGE_SIGNATURES = {
+  contago_app: [
+    'contago.crear_negocio(uuid,text)',
+    'contago.renombrar_negocio(uuid,uuid,text)',
+    'contago.gestionar_membresia(uuid,uuid,uuid,contago.rol_negocio,boolean)',
+    'contago.autorizar_cuenta(uuid,uuid,uuid,uuid,boolean)',
+    'contago.crear_cuenta(uuid,uuid,text)',
+    'contago.crear_categoria(uuid,uuid,contago.tipo_categoria,text)',
+    'contago.crear_tercero(uuid,uuid,text)',
+    'contago.listar_negocios(uuid)',
+    'contago.listar_movimientos(uuid,uuid,integer,timestamptz,uuid)',
+    'contago.listar_cuentas(uuid,uuid)',
+    'contago.listar_catalogos(uuid,uuid)',
+    'contago.listar_membresias(uuid,uuid)',
+    'contago.listar_obligaciones(uuid,uuid)',
+    'contago.listar_aplicaciones(uuid,uuid,uuid)',
+    'contago.registrar_operacion(uuid,uuid,uuid,contago.tipo_operacion,numeric,uuid,uuid,uuid,uuid)',
+    'contago.resolver_gasto(uuid,uuid,uuid,boolean,text)',
+    'contago.crear_obligacion(uuid,uuid,uuid,contago.tipo_obligacion,text,numeric,date)',
+    'contago.aplicar_pago(uuid,uuid,uuid,uuid,uuid,numeric)',
+    'contago.reversar_operacion(uuid,uuid,uuid,uuid)',
+  ],
+  contago_auth: [
+    'contago.registrar_usuario(text,text)',
+    'contago.buscar_credencial(text)',
+    'contago.auth_crear_sesion(uuid,text,bytea)',
+    'contago.auth_identidad(bytea)',
+    'contago.auth_revocar(bytea,boolean)',
+    'contago.auth_cambiar_contrasena(bytea,text,text,bytea)',
+  ],
+  contago_sa: [
+    'contago.sa_listar_usuarios(uuid,uuid)',
+    'contago.sa_estado_usuario(uuid,uuid,boolean)',
+    'contago.sa_estado_negocio(uuid,uuid,boolean)',
+  ],
+} as const;
+
+export type DatabaseRole = keyof typeof PRIVILEGE_SIGNATURES;
+
 // Consultar solo el catálogo. Esta comprobación no ejecuta funciones de negocio.
 export const CHECK_RUNTIME_PRIVILEGES = `
-  WITH app_functions(signature) AS (
-    VALUES
-      ('contago.crear_negocio(uuid,text)'),
-      ('contago.renombrar_negocio(uuid,uuid,text)'),
-      ('contago.gestionar_membresia(uuid,uuid,uuid,contago.rol_negocio,boolean)'),
-      ('contago.autorizar_cuenta(uuid,uuid,uuid,uuid,boolean)'),
-      ('contago.crear_cuenta(uuid,uuid,text)'),
-      ('contago.crear_categoria(uuid,uuid,contago.tipo_categoria,text)'),
-      ('contago.crear_tercero(uuid,uuid,text)'),
-      ('contago.listar_negocios(uuid)'),
-      ('contago.listar_movimientos(uuid,uuid,integer,timestamptz,uuid)'),
-      ('contago.listar_cuentas(uuid,uuid)'),
-      ('contago.listar_catalogos(uuid,uuid)'),
-      ('contago.listar_membresias(uuid,uuid)'),
-      ('contago.listar_obligaciones(uuid,uuid)'),
-      ('contago.listar_aplicaciones(uuid,uuid,uuid)'),
-      ('contago.registrar_operacion(uuid,uuid,uuid,contago.tipo_operacion,numeric,uuid,uuid,uuid,uuid)'),
-      ('contago.resolver_gasto(uuid,uuid,uuid,boolean,text)'),
-      ('contago.crear_obligacion(uuid,uuid,uuid,contago.tipo_obligacion,text,numeric,date)'),
-      ('contago.aplicar_pago(uuid,uuid,uuid,uuid,uuid,numeric)'),
-      ('contago.reversar_operacion(uuid,uuid,uuid,uuid)')
-  ), expected AS (
-    SELECT to_regprocedure(signature)::oid AS oid FROM app_functions
+  WITH expected AS (
+    SELECT to_regprocedure(signature)::oid AS oid FROM unnest($2::text[]) AS signatures(signature)
   ), app_schema AS (
     SELECT oid, nspowner FROM pg_namespace WHERE nspname = 'contago'
   )
@@ -34,13 +52,13 @@ export const CHECK_RUNTIME_PRIVILEGES = `
     AND current_user = session_user
     AND current_setting('transaction_isolation') = 'read committed'
     AND NOT has_database_privilege(current_database(), 'CREATE')
-    AND EXISTS (SELECT 1 FROM pg_roles AS r WHERE r.rolname = 'contago_app'
+    AND EXISTS (SELECT 1 FROM pg_roles AS r WHERE r.rolname = $1::name
       AND NOT (r.rolcanlogin OR r.rolsuper OR r.rolcreatedb OR r.rolcreaterole OR r.rolreplication OR r.rolbypassrls)
       AND pg_has_role(r.oid, 'USAGE'))
     AND NOT EXISTS (SELECT 1 FROM pg_roles AS r
-      WHERE r.rolname NOT IN (current_user, 'contago_app') AND pg_has_role(r.oid, 'MEMBER'))
+      WHERE r.rolname NOT IN (current_user, $1::name) AND pg_has_role(r.oid, 'MEMBER'))
     AND NOT EXISTS (SELECT 1 FROM pg_auth_members AS m JOIN pg_roles AS r ON r.oid = m.member
-      WHERE r.rolname IN (current_user, 'contago_app') AND m.admin_option)
+      WHERE r.rolname IN (current_user, $1::name) AND m.admin_option)
     AND NOT EXISTS (SELECT 1 FROM pg_database AS d
       WHERE d.datname = current_database() AND pg_has_role(d.datdba, 'MEMBER'))
     AND EXISTS (SELECT 1 FROM app_schema s
