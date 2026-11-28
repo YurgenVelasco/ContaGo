@@ -2,12 +2,14 @@ import 'reflect-metadata';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { configureHttp } from './auth/http-security';
 import { RUNTIME_CONFIG } from './config/config.module';
 import type { RuntimeConfig } from './config/environment';
 
 async function bootstrap(): Promise<void> {
   const app = await NestFactory.create(AppModule, { abortOnError: false });
   const { host, port } = app.get<RuntimeConfig>(RUNTIME_CONFIG);
+  configureHttp(app);
   app.enableShutdownHooks();
   await app.init();
   try {

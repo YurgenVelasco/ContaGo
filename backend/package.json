@@ -11,14 +11,16 @@
     "build": "tsc -p tsconfig.json",
     "start": "node --env-file-if-exists=.env dist/main.js",
     "lint": "eslint .",
-    "test": "pnpm build && node --test tests/config.test.cjs tests/health.test.cjs",
+    "test": "pnpm build && node --test tests/config.test.cjs tests/health.test.cjs tests/auth.test.cjs",
     "test:postgres": "pnpm build && node --env-file-if-exists=.env --test tests/postgres.test.cjs",
+    "test:auth": "pnpm build && node --test tests/auth.e2e.test.cjs",
     "prisma:introspect": "prisma db pull --print"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.0",
     "@nestjs/core": "^11.1.0",
     "@nestjs/platform-express": "^11.1.0",
+    "@node-rs/argon2": "2.0.2",
     "pg": "^8.16.0",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.2"

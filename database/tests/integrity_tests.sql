@@ -47,9 +47,10 @@ DECLARE
     ob_ajena uuid := crear_obligacion(m, otro, t_ajeno, 'POR_COBRAR', 'Recibo ajeno', 50);
     pago uuid := gen_random_uuid();
 BEGIN
-    PERFORM pg_temp.comprobar((SELECT count(*) = 13 FROM pg_tables WHERE schemaname = 'contago'), '13 tablas');
+    PERFORM pg_temp.comprobar((SELECT count(*) = 13 FROM pg_tables WHERE schemaname = 'contago' AND tablename <> 'sesiones'), '13 tablas de fase 1');
     PERFORM pg_temp.comprobar((SELECT count(*) = 13 FROM pg_constraint k JOIN pg_namespace ns ON ns.oid = k.connamespace
-        WHERE ns.nspname = 'contago' AND k.contype = 'p'), 'claves primarias');
+        WHERE ns.nspname = 'contago' AND k.contype = 'p'
+          AND k.conrelid <> coalesce(to_regclass('contago.sesiones')::oid, 0::oid)), 'claves primarias de fase 1');
     PERFORM pg_temp.comprobar((SELECT count(*) >= 20 AND bool_and(k.convalidated)
         FROM pg_constraint k JOIN pg_namespace ns ON ns.oid = k.connamespace
         WHERE ns.nspname = 'contago' AND k.contype = 'f'), 'claves foraneas validadas');

@@ -24,7 +24,7 @@ function integer(raw: string, name: string, min: number, max: number): number {
   return parsed;
 }
 
-function parseDatabaseUrl(raw: string | undefined) {
+export function parseDatabaseUrl(raw: string | undefined, name = 'DATABASE_URL') {
   try {
     const url = new URL(raw ?? '');
     if (
@@ -33,25 +33,25 @@ function parseDatabaseUrl(raw: string | undefined) {
       !url.username || !url.password || !/^\/[^/]+$/.test(url.pathname) ||
       (raw && /[?#]/.test(raw))
     ) {
-      invalid('DATABASE_URL');
+      invalid(name);
     }
 
     const user = decodeURIComponent(url.username);
     const password = decodeURIComponent(url.password);
     const database = decodeURIComponent(url.pathname.slice(1));
     if ([user, password, database].some((value) => !value || value.includes('\0'))) {
-      invalid('DATABASE_URL');
+      invalid(name);
     }
 
     return {
       host: url.hostname.replace(/^\[|\]$/g, ''),
-      port: integer(url.port || '5432', 'DATABASE_URL', 1, 65535),
+      port: integer(url.port || '5432', name, 1, 65535),
       user,
       password,
       database,
     };
   } catch {
-    return invalid('DATABASE_URL');
+    return invalid(name);
   }
 }
 

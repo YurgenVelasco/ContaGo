@@ -6,9 +6,11 @@ Se revisaron `001_schema.sql` a `005_seed_catalogs.sql`, el README y los cuatro 
 |---|---|
 | Propietario de despliegue | Gestiona esquema, objetos, permisos y catálogo. Sus credenciales pertenecen al proceso de despliegue. |
 | LOGIN operativo, miembro de `contago_app` | Ejecuta las funciones publicadas de negocio. El arranque exige los 19 permisos de ejecución y rechaza otros permisos en `contago`. |
-| LOGIN de autenticación, miembro de `contago_auth` | Futuro pool con acceso a `registrar_usuario(text,text)` y `buscar_credencial(text)`. |
-| LOGIN administrativo, miembro de `contago_sa` | Futuro pool con las tres funciones `sa_*` del script 004. |
+| LOGIN de autenticación, miembro de `contago_auth` | Pool de autenticación con registro, consulta de credenciales y cuatro funciones de sesiones, según 004 y 006. |
+| LOGIN administrativo, miembro de `contago_sa` | Pool con las tres funciones `sa_*` del script 004. |
 | Identidad de introspección | Conexión de desarrollo separada con visibilidad de los metadatos necesarios. Úsela contra una base desechable o de desarrollo. |
+
+La migración 006 agrega `contago.sesiones` y funciones de autenticación restringidas. El bloqueo por usuario ordena login, revocación y cambio de contraseña. El login compara el hash que se verificó con el hash vigente antes de crear la sesión. La revocación y la rotación requieren que la sesión aún sea válida al adquirir el bloqueo. Las funciones de negocio y SA siguen siendo las de 004. El usuario operativo carece de acceso a los hashes y a las funciones de autenticación.
 
 ## Funciones financieras
 

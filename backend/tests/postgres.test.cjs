@@ -7,7 +7,7 @@ const { Client } = require('pg');
 const { AppModule } = require('../dist/app.module');
 const { validateEnvironment } = require('../dist/config/environment');
 const { DatabaseService } = require('../dist/database/database.service');
-const { CHECK_RUNTIME_PRIVILEGES } = require('../dist/database/runtime-privileges');
+const { CHECK_RUNTIME_PRIVILEGES, PRIVILEGE_SIGNATURES } = require('../dist/database/runtime-privileges');
 
 test('real PostgreSQL serves readiness and prevents financial DML and administrative access', async () => {
   if (process.env.NODE_ENV !== 'test') {
@@ -34,7 +34,7 @@ test('real PostgreSQL serves readiness and prevents financial DML and administra
   });
   await client.connect();
   try {
-    const { rows } = await client.query(CHECK_RUNTIME_PRIVILEGES);
+    const { rows } = await client.query(CHECK_RUNTIME_PRIVILEGES, ['contago_app', PRIVILEGE_SIGNATURES.contago_app]);
     assert.equal(rows[0]?.valid, true);
     const probe = randomUUID();
     await assert.rejects(client.query(
